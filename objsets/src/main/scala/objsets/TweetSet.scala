@@ -86,7 +86,6 @@ abstract class TweetSet {
   			val tmp = set.mostRetweeted
   			new Cons(tmp, loop(set.remove(tmp), list))
   		}
-  		
   	}
   	loop(this, Nil)
   }
@@ -157,8 +156,9 @@ class NonEmpty(elem: Tweet, left: TweetSet, right: TweetSet) extends TweetSet {
   def union(that: TweetSet): TweetSet = ((left union right) union that) incl elem
   
   def mostRetweeted: Tweet = {
-  	if (right.isEmpty) elem
-  	else right.mostRetweeted
+  	val tmp = (left union right).filter((x: Tweet) => (x.retweets > elem.retweets))
+  	if (tmp.isEmpty) elem
+  	else tmp.mostRetweeted
   }
 
   /**
