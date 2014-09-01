@@ -155,7 +155,7 @@ class NonEmpty(elem: Tweet, left: TweetSet, right: TweetSet) extends TweetSet {
     else ans
   }
 
-  def union(that: TweetSet): TweetSet = ((left union right) union that) incl elem
+  def union(that: TweetSet): TweetSet = left union (right union (that incl elem))
   
   def mostRetweeted: Tweet = {
   	val tmp = (left union right).filter((x: Tweet) => (x.retweets > elem.retweets))
